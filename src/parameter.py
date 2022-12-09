@@ -9,7 +9,7 @@ X_WORDS = tuple(concat((BEGIN_WORD, END_WORD, '+', '-'),
 Y_WORDS = tuple(concat((BEGIN_WORD, END_WORD, '-'),
                        map(str, range(10))))
 
-# TODO: チューニング！　多分、問題の複雑さに比べてパラメーターが大きすぎる。
+# TODO: ハイパー・パラメーター・チューニングする！　多分、問題の複雑さに比べてパラメーターが大きすぎる。
 
 BLOCK_SIZE = 3
 ATTENTION_HEAD_SIZE = 4
