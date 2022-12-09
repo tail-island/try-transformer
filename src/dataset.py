@@ -4,7 +4,7 @@ import pandas as pd
 
 from funcy import partial
 from parameter import X_WORDS, Y_WORDS
-from transformer import create_encoder, encode
+from transformer import create_word_encoder, encode_words
 
 
 def get_data_frame(filename):
@@ -17,8 +17,8 @@ def get_dataset(filename):
     x_strings = data_frame['Expression']
     y_strings = data_frame['Answer']
 
-    xs = np.array(tuple(map(partial(encode, create_encoder(X_WORDS), max(map(len, x_strings))), x_strings)), dtype=np.int32)
-    ys = np.array(tuple(map(partial(encode, create_encoder(Y_WORDS), max(map(len, y_strings))), y_strings)), dtype=np.int32)
+    xs = np.array(tuple(map(partial(encode_words, create_word_encoder(X_WORDS), max(map(len, x_strings))), x_strings)), dtype=np.int32)
+    ys = np.array(tuple(map(partial(encode_words, create_word_encoder(Y_WORDS), max(map(len, y_strings))), y_strings)), dtype=np.int32)
 
     return (xs, ys[:, :-1]), ys[:, 1:]
 

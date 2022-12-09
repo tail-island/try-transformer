@@ -106,7 +106,7 @@ def create_op(block_size,
     return op
 
 
-def create_encoder(words):
+def create_word_encoder(words):
     def op(x):
         return encoder[x]
 
@@ -115,7 +115,7 @@ def create_encoder(words):
     return op
 
 
-def create_decoder(words):
+def create_word_decoder(words):
     def op(x):
         return decoder[x] if x != 0 else END_WORD
 
@@ -124,11 +124,11 @@ def create_decoder(words):
     return op
 
 
-def encode(encoder, max_length, words):
+def encode_words(encoder, max_length, words):
     return tuple(take(max_length + 2, concat(map(encoder, concat((BEGIN_WORD,), words, (END_WORD,))),
                                              repeat(0))))
 
 
-def decode(decoder, separator, word_numbers):
+def decode_words(decoder, separator, word_numbers):
     return separator.join(takewhile(lambda word: word != END_WORD,
                                     map(decoder, word_numbers)))
