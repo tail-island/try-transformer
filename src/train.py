@@ -4,7 +4,6 @@ from dataset import get_train_dataset
 from parameter import ATTENTION_DIMENSION_SIZE, ATTENTION_DROPOUT_RATE, ATTENTION_HEAD_SIZE, BLOCK_SIZE, FEED_FORWARD_DIMENSION_SIZE, FEED_FORWARD_DROPOUT_RATE, LEARNING_RATE, X_MAX_LENGTH, X_WORD_SIZE, Y_MAX_LENGTH, Y_WORD_SIZE
 from sklearn.model_selection import train_test_split
 from transformer import create_op
-# , LearningRateSchedule, Loss
 
 
 def loss(y_true, y_pred):
@@ -30,7 +29,6 @@ op = create_op(BLOCK_SIZE,
                Y_MAX_LENGTH)
 
 model = tf.keras.Model(inputs, op(inputs))
-# model.compile(tf.keras.optimizers.Adam(LearningRateSchedule(ATTENTION_DIMENSION_SIZE), beta_1=0.9, beta_2=0.98, epsilon=1e-9), loss=Loss())
 model.compile(tf.keras.optimizers.experimental.AdamW(LEARNING_RATE), loss=loss)
 model.summary()
 
