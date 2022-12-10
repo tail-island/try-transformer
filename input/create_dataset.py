@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 from funcy import cat, partial, repeatedly
-from operator import add, floordiv, mul, sub
+from operator import add, sub
 
 
 rng = np.random.default_rng(0)
