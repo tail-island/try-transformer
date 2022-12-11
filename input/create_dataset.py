@@ -5,6 +5,10 @@ from funcy import cat, partial, repeatedly
 from operator import add, sub
 
 
+OPERATORS = (('+', add),
+             ('-', sub))
+
+
 rng = np.random.default_rng(0)
 
 
@@ -17,9 +21,7 @@ def create_sentence(op_str, op):
 
 
 def create_data_frame(size):
-    expressions, answers = zip(*cat(map(lambda op: repeatedly(partial(create_sentence, *op), size // 2),
-                                        (('+', add),
-                                         ('-', sub)))))
+    expressions, answers = zip(*cat(map(lambda op: repeatedly(partial(create_sentence, *op), size // len(OPERATORS)), OPERATORS)))
 
     data_frame = pd.DataFrame({'Expression': expressions, 'Answer': answers}, dtype='string')
     data_frame.index.name = 'ID'
