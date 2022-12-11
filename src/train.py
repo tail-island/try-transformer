@@ -1,7 +1,7 @@
 import tensorflow as tf
 
 from dataset import get_train_dataset
-from parameter import ATTENTION_DIMENSION_SIZE, ATTENTION_DROPOUT_RATE, ATTENTION_HEAD_SIZE, BLOCK_SIZE, FEED_FORWARD_DIMENSION_SIZE, FEED_FORWARD_DROPOUT_RATE, LEARNING_RATE, X_MAX_LENGTH, X_WORD_SIZE, Y_MAX_LENGTH, Y_WORD_SIZE
+from parameter import ATTENTION_DIMENSION_SIZE, ATTENTION_DROPOUT_RATE, ATTENTION_HEAD_SIZE, BATCH_SIZE, BLOCK_SIZE, EPOCH_SIZE, FEED_FORWARD_DIMENSION_SIZE, FEED_FORWARD_DROPOUT_RATE, LEARNING_RATE, X_MAX_LENGTH, X_WORD_SIZE, Y_MAX_LENGTH, Y_WORD_SIZE
 from sklearn.model_selection import train_test_split
 from transformer import create_op
 
@@ -32,5 +32,5 @@ model = tf.keras.Model(inputs, op(inputs))
 model.compile(tf.keras.optimizers.experimental.AdamW(LEARNING_RATE), loss=loss)
 model.summary()
 
-model.fit((train_xs_1, train_xs_2), train_ys, 256, 100, validation_data=((valid_xs_1, valid_xs_2), valid_ys))
+model.fit((train_xs_1, train_xs_2), train_ys, BATCH_SIZE, EPOCH_SIZE, validation_data=((valid_xs_1, valid_xs_2), valid_ys))
 model.save('model', include_optimizer=False)
